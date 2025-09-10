@@ -1,163 +1,171 @@
 # Torres Hotel Management System
 
-A comprehensive hotel management system built with PHP and MySQL, designed to streamline hotel operations including reservations, room management, POS system, HR, accounting, and more.
+A comprehensive hotel management system built with PHP and MySQL, featuring multiple modules for different hotel operations.
 
 ## Features
 
 ### Core Modules
-- **Admin Dashboard** - Complete system administration and oversight
-- **Front Desk** - Reservation management and guest services
+- **Admin Dashboard** - System administration and user management
+- **Front Desk** - Guest check-in/check-out and reservations
 - **Housekeeping** - Room status and cleaning management
-- **HR Management** - Employee management, attendance, payroll, and leave requests
-- **Accounting** - Financial management, invoices, payments, and reports
-- **POS System** - Point of sale with RFID card integration
+- **Accounting** - Financial management and reporting
+- **HR** - Employee management, attendance, and payroll
+- **POS System** - Point of sale for hotel services
 
 ### Key Capabilities
-- Multi-role user management (Admin, Front Desk, Housekeeping, HR, Accounting, POS)
-- Room availability and status tracking
-- Guest reservation system
-- RFID card-based POS transactions
-- Employee attendance and payroll management
-- Financial reporting and invoice generation
+- Multi-role user authentication
+- Room management and availability tracking
+- Guest registration and booking system
+- Payment processing and invoicing
+- Employee attendance and leave management
+- RFID card integration for POS
 - QR code generation for various purposes
-- Content management for public landing page
-- Responsive web design
+- Comprehensive reporting system
 
-## Technology Stack
+## Requirements
 
-- **Backend**: PHP 7.4+
-- **Database**: MySQL 5.7+
-- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
-- **Icons**: Font Awesome
-- **Additional**: PDO for database operations, RFID integration
-
-## Project Structure
-
-```
-torresv8/
-├── admin/              # Admin panel modules
-├── accounting/         # Accounting and financial management
-├── api/               # API endpoints
-├── assets/            # Static assets (CSS, JS, images)
-├── database/          # Database migrations and schema
-├── frontdesk/         # Front desk operations
-├── housekeeping/      # Housekeeping management
-├── hr/                # Human resources management
-├── includes/          # Shared PHP includes and configuration
-├── pos_admin/         # POS system administration
-├── pos_cashier/       # POS cashier interface
-├── public/            # Public-facing pages
-└── db/                # Database utilities and schema
-```
+- **PHP**: 7.4 or higher
+- **MySQL**: 5.7 or higher
+- **Web Server**: Apache/Nginx
+- **PHP Extensions**: mysqli, PDO, GD (for QR codes)
 
 ## Installation
 
-### Prerequisites
-- Web server (Apache/Nginx)
-- PHP 7.4 or higher
-- MySQL 5.7 or higher
-- Web browser with JavaScript enabled
+### 1. Clone the Repository
 
-### Setup Instructions
+```bash
+git clone https://github.com/yourusername/torres-hotel-management.git
+cd torres-hotel-management
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/torres-hotel-management.git
-   cd torres-hotel-management
+### 2. Database Setup
+
+1. Create a new MySQL database
+2. Import the database schema:
+   ```sql
+   mysql -u your_username -p your_database_name < db/schema.sql
    ```
 
-2. **Database Setup**
-   - Create a new MySQL database
-   - Import the database schema from `db/schema.sql`
-   - Run migration files from `database/migrations/` if needed
+### 3. Configuration
 
-3. **Configuration**
-   - Copy `includes/config.sample.php` to `includes/config.php`
-   - Update database credentials in `includes/config.php`:
-     ```php
-     define('DB_HOST', 'your_host');
-     define('DB_USER', 'your_username');
-     define('DB_PASS', 'your_password');
-     define('DB_NAME', 'your_database');
-     ```
+1. Copy the sample configuration file:
+   ```bash
+   cp includes/config.sample.php includes/config.php
+   ```
 
-4. **Web Server Configuration**
-   - Point your web server document root to the project directory
-   - Ensure PHP has write permissions for logs directory
-   - Enable PHP extensions: mysqli, pdo_mysql
+2. Edit `includes/config.php` and update the database credentials:
+   ```php
+   define('DB_HOST', 'your_database_host');
+   define('DB_USER', 'your_database_username');
+   define('DB_PASS', 'your_database_password');
+   define('DB_NAME', 'your_database_name');
+   ```
 
-5. **Initial Setup**
-   - Access the application through your web browser
-   - Use the default admin credentials (update immediately after first login)
-   - Configure system settings through the admin panel
+### 4. Create Initial Users
 
-## Default Users
+1. Copy and customize the user creation scripts:
+   ```bash
+   cp create_pos_admin_user.sql.sample create_pos_admin_user.sql
+   cp create_accounting_user.sql.sample create_accounting_user.sql
+   ```
 
-After running the database schema, you can create initial users using the provided SQL files:
+2. **IMPORTANT**: Edit these files to change default passwords before running!
 
-- `create_pos_admin_user.sql` - Creates POS admin user
-- `create_accounting_user.sql` - Creates accounting user
+3. Run the scripts to create initial users:
+   ```sql
+   mysql -u your_username -p your_database_name < create_pos_admin_user.sql
+   mysql -u your_username -p your_database_name < create_accounting_user.sql
+   ```
 
-**Important**: Change all default passwords immediately after installation.
+### 5. Set Permissions
 
-## Usage
-
-### Admin Panel
-- Access: `/admin/dashboard.php`
-- Manage users, rooms, content, and system settings
-- Generate QR codes and manage leave requests
-
-### POS System
-- Admin: `/pos_admin/dashboard.php`
-- Cashier: `/pos_cashier/dashboard.php`
-- Supports RFID card transactions and inventory management
-
-### Other Modules
-- Front Desk: `/frontdesk/dashboard.php`
-- Housekeeping: `/housekeeping/dashboard.php`
-- HR: `/hr/dashboard.php`
-- Accounting: `/accounting/dashboard.php`
-
-## Security Features
-
-- Password hashing using PHP's `password_hash()`
-- SQL injection prevention with prepared statements
-- Session-based authentication
-- Role-based access control
-- Input validation and sanitization
-
-## Development
-
-### File Structure Guidelines
-- Place shared functions in `includes/functions.php`
-- Database configuration in `includes/config.php` (not committed)
-- Use `includes/auth.php` for authentication checks
-- Follow existing code patterns and naming conventions
-
-### Database Migrations
-- Place new migrations in `database/migrations/`
-- Use descriptive filenames with timestamps
-- Include rollback instructions in comments
+Ensure the web server has write permissions to:
+- `logs/` directory (will be created automatically)
+- Any upload directories
 
 ## Deployment
 
 ### Production Deployment
-1. Use `includes/config_production.php` as template for production config
-2. Enable error logging and disable display_errors
-3. Set up SSL/HTTPS
-4. Configure regular database backups
-5. Update all default passwords
-6. Review and configure security settings
 
-See `DEPLOYMENT_GUIDE.md` for detailed deployment instructions.
+For production deployment, see the detailed [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md).
+
+**Quick production checklist:**
+1. Use `includes/config_production.php` as a template
+2. Disable error display in production
+3. Set up proper error logging
+4. Use HTTPS
+5. Change all default passwords
+6. Set proper file permissions
+
+### Environment Variables
+
+For enhanced security, consider using environment variables for sensitive configuration:
+
+```php
+// In config.php
+define('DB_HOST', $_ENV['DB_HOST'] ?? 'localhost');
+define('DB_USER', $_ENV['DB_USER'] ?? 'root');
+define('DB_PASS', $_ENV['DB_PASS'] ?? '');
+define('DB_NAME', $_ENV['DB_NAME'] ?? 'hotel_management');
+```
+
+## Usage
+
+### Default Login Credentials
+
+**⚠️ CHANGE THESE IMMEDIATELY AFTER INSTALLATION!**
+
+- **POS Admin**: `posadmin` / `admin123`
+- **Accounting**: `accounting` / `password`
+
+### Module Access
+
+- **Admin Panel**: `/admin/dashboard.php`
+- **POS Admin**: `/pos_admin/dashboard.php`
+- **POS Cashier**: `/pos_cashier/dashboard.php`
+- **Front Desk**: `/frontdesk/dashboard.php`
+- **Housekeeping**: `/housekeeping/dashboard.php`
+- **Accounting**: `/accounting/dashboard.php`
+- **HR**: `/hr/dashboard.php`
+
+## Security Notes
+
+1. **Change Default Passwords**: Always change default passwords before deployment
+2. **Database Security**: Use strong database passwords and limit user privileges
+3. **File Permissions**: Set appropriate file permissions (644 for files, 755 for directories)
+4. **HTTPS**: Always use HTTPS in production
+5. **Error Logging**: Enable error logging but disable error display in production
+6. **Regular Updates**: Keep PHP and MySQL updated
+
+## Troubleshooting
+
+### Common Issues
+
+1. **HTTP 500 Error**: Usually database connection issues
+   - Check database credentials in `config.php`
+   - Verify database exists and is accessible
+   - Check error logs in `logs/error.log`
+
+2. **Database Connection Failed**: 
+   - Verify MySQL service is running
+   - Check database credentials
+   - Ensure database exists
+
+3. **Permission Denied**:
+   - Check file permissions
+   - Ensure web server can write to logs directory
+
+### Testing Database Connection
+
+Visit `/db/test_connection.php` to test your database connection.
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Create a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## License
 
@@ -166,14 +174,26 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For support and questions:
-- Create an issue in the GitHub repository
-- Check the documentation in the `docs/` directory
-- Review the deployment guide for common setup issues
+- Check the [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for deployment issues
+- Review the troubleshooting section above
+- Check the error logs for specific error messages
 
-## Changelog
+## Project Structure
 
-See `CHANGELOG.md` for version history and updates.
-
----
-
-**Note**: This system is designed for hotel management operations. Ensure proper security measures are in place before deploying to production environments.
+```
+torresv8/
+├── admin/              # Admin panel modules
+├── accounting/         # Accounting module
+├── api/               # API endpoints
+├── assets/            # CSS, JS, images
+├── database/          # Database migrations
+├── db/                # Database schema and utilities
+├── frontdesk/         # Front desk operations
+├── housekeeping/      # Housekeeping module
+├── hr/                # Human resources module
+├── includes/          # Configuration and common files
+├── pos_admin/         # POS administration
+├── pos_cashier/       # POS cashier interface
+├── public/            # Public-facing pages
+└── logs/              # Application logs (auto-created)
+```

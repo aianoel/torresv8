@@ -1,0 +1,22 @@
+-- Create a POS Admin user for testing
+-- IMPORTANT: Change the password before running this script!
+-- Default password: admin123 (hashed)
+
+INSERT INTO users (username, password, email, role, first_name, last_name) 
+VALUES (
+    'posadmin', 
+    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', -- password: admin123 - CHANGE THIS!
+    'posadmin@hotel.com',  -- Change this email
+    'pos_admin', 
+    'POS', 
+    'Administrator'
+);
+
+-- Verify the user was created
+SELECT id, username, email, role, first_name, last_name FROM users WHERE role = 'pos_admin';
+
+-- SECURITY NOTE:
+-- 1. Change the default password hash above
+-- 2. Update the email address
+-- 3. Consider creating a stronger password
+-- 4. Delete this file after running the script

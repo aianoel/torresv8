@@ -1,0 +1,19 @@
+-- Create accounting user for testing
+-- IMPORTANT: Change the password before running this script!
+-- Default password: password (hashed)
+
+INSERT INTO users (username, password, email, role, first_name, last_name) 
+VALUES (
+    'accounting', 
+    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', -- password: password - CHANGE THIS!
+    'accounting@hotel.com',  -- Change this email
+    'accounting', 
+    'Accounting', 
+    'User'
+);
+
+-- SECURITY NOTE:
+-- 1. Change the default password hash above
+-- 2. Update the email address
+-- 3. Consider creating a stronger password
+-- 4. Delete this file after running the script
