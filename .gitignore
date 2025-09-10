@@ -1,0 +1,67 @@
+# Configuration files with sensitive data
+includes/config.php
+
+# Log files
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache files
+cache/
+*.cache
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Upload directories (if any)
+uploads/
+files/
+
+# Vendor directories (if using Composer)
+vendor/
+
+# Node modules (if using Node.js)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Package files
+*.zip
+*.tar.gz
+*.rar
+
+# Database dumps
+*.sql.gz
+*.sql.bz2
+database_backup_*
+
+# Error logs
+error_log
+php_errors.log
