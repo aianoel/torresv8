@@ -4,9 +4,9 @@ define('CONFIG_LOADED', true);
 
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'hotel_management');
+define('DB_USER', 'u870495195_torres');
+define('DB_PASS', '8B7]ML~FA/f');
+define('DB_NAME', 'u870495195_torres');
 
 // Application settings
 define('APP_NAME', 'Torres Hotel Management System');
