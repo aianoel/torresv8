@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007bff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0056b3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="120" height="40" rx="8" fill="url(#logoGradient)"/>
+  
+  <!-- Hotel Icon -->
+  <g transform="translate(8, 8)">
+    <rect x="0" y="16" width="24" height="8" fill="white" opacity="0.9"/>
+    <rect x="2" y="6" width="4" height="10" fill="white" opacity="0.8"/>
+    <rect x="8" y="4" width="4" height="12" fill="white" opacity="0.8"/>
+    <rect x="14" y="6" width="4" height="10" fill="white" opacity="0.8"/>
+    <rect x="20" y="8" width="2" height="8" fill="white" opacity="0.8"/>
+    
+    <!-- Windows -->
+    <rect x="3" y="8" width="2" height="2" fill="#007bff"/>
+    <rect x="9" y="6" width="2" height="2" fill="#007bff"/>
+    <rect x="15" y="8" width="2" height="2" fill="#007bff"/>
+    
+    <rect x="3" y="12" width="2" height="2" fill="#007bff"/>
+    <rect x="9" y="10" width="2" height="2" fill="#007bff"/>
+    <rect x="15" y="12" width="2" height="2" fill="#007bff"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="40" y="16" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">TORRES</text>
+  <text x="40" y="28" font-family="Arial, sans-serif" font-size="8" fill="white" opacity="0.9">HOTEL</text>
+</svg>
