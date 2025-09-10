@@ -93,75 +93,71 @@ foreach ($content_items as $item) {
     </style>
 <?php renderAdminPageHeader('Content Management', 'Manage website content and landing page information'); ?>
 
-            <!-- Content Management Section -->
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2>Landing Page Content Management</h2>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContentModal">
-                            <i class="bi bi-plus-circle me-2"></i>Add New Content
-                        </button>
+<!-- Content Management Section -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Landing Page Content Management</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContentModal">
+        <i class="bi bi-plus-circle me-2"></i>Add New Content
+    </button>
+</div>
+
+<?php if (isset($success_message)): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?php echo $success_message; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($error_message)): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?php echo $error_message; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<?php endif; ?>
+                    
+<!-- Content Sections -->
+<?php 
+$section_order = ['hero', 'features', 'about', 'testimonials', 'footer'];
+foreach ($section_order as $section): 
+    if (isset($content_by_section[$section])):
+        $items = $content_by_section[$section];
+?>
+    <div class="content-section">
+        <div class="section-header">
+            <h5 class="mb-0"><?php echo ucfirst(str_replace('_', ' ', $section)); ?> Section</h5>
+        </div>
+        <div class="section-content">
+            <?php foreach ($items as $item): ?>
+                <div class="content-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <strong><?php echo ucfirst(str_replace('_', ' ', $item['content_key'])); ?></strong>
+                            <br><small class="text-muted"><?php echo $item['content_type']; ?></small>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="content-preview">
+                                <?php if ($item['content_type'] === 'image'): ?>
+                                    <img src="<?php echo $item['content_value']; ?>" alt="Preview" style="max-width: 100px; max-height: 60px; object-fit: cover;">
+                                    <br><small><?php echo $item['content_value']; ?></small>
+                                <?php else: ?>
+                                    <?php echo strlen($item['content_value']) > 100 ? substr($item['content_value'], 0, 100) . '...' : $item['content_value']; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <button class="btn btn-edit btn-sm" onclick="editContent('<?php echo $item['content_key']; ?>', '<?php echo addslashes($item['content_value']); ?>', '<?php echo $item['content_type']; ?>')">
+                                <i class="bi bi-pencil me-1"></i>Edit
+                            </button>
+                        </div>
                     </div>
-                    
-                    <?php if (isset($success_message)): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <?php echo $success_message; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <?php if (isset($error_message)): ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <?php echo $error_message; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <!-- Content Sections -->
-                    <?php 
-                    $section_order = ['hero', 'features', 'about', 'testimonials', 'footer'];
-                    foreach ($section_order as $section): 
-                        if (isset($content_by_section[$section])):
-                            $items = $content_by_section[$section];
-                    ?>
-                        <div class="content-section">
-                            <div class="section-header">
-                                <h5 class="mb-0"><?php echo ucfirst(str_replace('_', ' ', $section)); ?> Section</h5>
-                            </div>
-                            <div class="section-content">
-                                <?php foreach ($items as $item): ?>
-                                    <div class="content-item">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-3">
-                                                <strong><?php echo ucfirst(str_replace('_', ' ', $item['content_key'])); ?></strong>
-                                                <br><small class="text-muted"><?php echo $item['content_type']; ?></small>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="content-preview">
-                                                    <?php if ($item['content_type'] === 'image'): ?>
-                                                        <img src="<?php echo $item['content_value']; ?>" alt="Preview" style="max-width: 100px; max-height: 60px; object-fit: cover;">
-                                                        <br><small><?php echo $item['content_value']; ?></small>
-                                                    <?php else: ?>
-                                                        <?php echo strlen($item['content_value']) > 100 ? substr($item['content_value'], 0, 100) . '...' : $item['content_value']; ?>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 text-end">
-                                                <button class="btn btn-edit btn-sm" onclick="editContent('<?php echo $item['content_key']; ?>', '<?php echo addslashes($item['content_value']); ?>', '<?php echo $item['content_type']; ?>')">
-                                                    <i class="bi bi-pencil me-1"></i>Edit
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    <?php 
-                        endif;
-                    endforeach; 
-                    ?>
                 </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
+<?php 
+    endif;
+endforeach; 
+?>
     
     <!-- Edit Content Modal -->
     <div class="modal fade" id="editContentModal" tabindex="-1">
